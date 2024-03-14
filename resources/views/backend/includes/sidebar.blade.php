@@ -1,6 +1,6 @@
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="{{ route('home') }}" class="brand-link">
+    <a href="{{ route('admin.dashboard') }}" class="brand-link">
         <img src="https://assets.infyom.com/logo/blue_logo_150x150.png"
                 alt="AdminLTE Logo"
                 class="brand-image img-circle elevation-3">
