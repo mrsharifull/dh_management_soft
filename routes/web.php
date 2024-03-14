@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -37,4 +38,18 @@ Auth::routes();
 // Admin Dashboard Routes
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
+
+    Route::group(['as' => 'am.', 'prefix' => 'admin-management'], function () {
+        Route::controller(AdminController::class, 'admin')->prefix('admin')->name('admin.')->group(function () {
+            Route::get('index', 'index')->name('admin_list');
+            Route::get('details/{id}', 'details')->name('details.admin_list');
+            // Route::get('profile/{id}', 'profile')->name('admin_profile');
+            Route::get('create', 'create')->name('admin_create');
+            Route::post('create', 'store')->name('admin_create');
+            Route::get('edit/{id}', 'edit')->name('admin_edit');
+            Route::put('edit/{id}', 'update')->name('admin_edit');
+            Route::get('status/{id}', 'status')->name('status.admin_edit');
+            Route::get('delete/{id}', 'delete')->name('admin_delete');
+        });
+    });
 });

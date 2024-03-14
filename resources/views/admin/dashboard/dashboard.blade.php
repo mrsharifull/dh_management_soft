@@ -1,4 +1,4 @@
-@extends('backend.layouts.app',['pageSlug'=>'dashboard'])
+@extends('admin.layouts.app',['pageSlug'=>'dashboard'])
 @section('title', 'Admin Dashboard')
 @push('css')
 <style>

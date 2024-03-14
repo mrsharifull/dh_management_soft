@@ -14,6 +14,6 @@ class DashboardController extends Controller
     }
     public function dashboard(): View
     {
-        return view('backend.dashboard.dashboard');
+        return view('admin.dashboard.dashboard');
     }
 }

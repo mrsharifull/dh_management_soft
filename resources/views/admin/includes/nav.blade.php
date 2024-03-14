@@ -5,13 +5,13 @@
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-      {{-- @include('backend.includes.nav_items.notification') --}}
+      {{-- @include('admin.includes.nav_items.notification') --}}
       <li class="nav-item">
           <a class="nav-link" data-widget="fullscreen" href="#" role="button">
               <i class="fas fa-expand-arrows-alt"></i>
             </a>
         </li>
-        @include('backend.includes.nav_items.logout')
+        @include('admin.includes.nav_items.logout')
       
     </ul>
   </nav>
