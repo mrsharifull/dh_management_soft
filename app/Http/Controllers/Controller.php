@@ -17,8 +17,9 @@ class Controller extends BaseController
         }else{
             $modelData->status = 1;
         }
+        $modelData->updated_by = admin()->id;
         // $modelData->updated_by = admin()->id;
-        $modelData->save();
+        $modelData->update();
     }
     public function fileDelete($image)
     {

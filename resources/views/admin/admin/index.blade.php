@@ -1,17 +1,17 @@
-@extends('admin.layouts.app', ['pageSlug' => 'company'])
+@extends('admin.layouts.app', ['pageSlug' => 'admin'])
 
-@section('title', 'Company List')
+@section('title', 'Admin List')
 @section('content')
     <div class="row">
         <div class="col-12">
             <div class="card m-3">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3 class="card-title">{{ __('Company List') }}</h3>
+                    <h3 class="card-title">{{ __('Admin List') }}</h3>
                     <div class="button_ ms-auto">
                         @include('admin.partials.button', [
-                            'routeName' => 'company.company_create',
+                            'routeName' => 'am.admin.admin_create',
                             'className' => 'btn-outline-info',
-                            'label' => 'Add new company',
+                            'label' => 'Add new admin',
                         ])
                     </div>
 
@@ -22,7 +22,7 @@
                             <tr>
                                 <th>{{ __('SL') }}</th>
                                 <th>{{ __('Name') }}</th>
-                                <th>{{ __('Website') }}</th>
+                                <th>{{ __('Email') }}</th>
                                 <th>{{ __('Status') }}</th>
                                 <th>{{ __('Created By') }}</th>
                                 <th>{{ __('Creation Date') }}</th>
@@ -30,15 +30,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($companies as $company)
+                            @foreach ($admins as $admin)
                                 <tr>
                                     <td> {{ $loop->iteration }} </td>
-                                    <td>{{ $company->name }}</td>
-                                    <td>{{ removeHttpProtocol($company->website_url) }}</td>
-                                    <td><span class="{{ $company->getStatusBadgeClass() }}">{{ $company->getStatus() }}</span>
+                                    <td>{{ $admin->name }}</td>
+                                    <td>{{ $admin->email }}</td>
+                                    <td><span class="{{ $admin->getStatusBadgeClass() }}">{{ $admin->getStatus() }}</span>
                                     </td>
-                                    <td>{{ $company->created_user->name ?? 'System' }}</td>
-                                    <td>{{timeFormate($company->created_at)}}</td>
+                                    <td>{{ $admin->created_user->name ?? 'System' }}</td>
+                                    <td>{{timeFormate($admin->created_at)}}</td>
                                     <td class="text-center align-middle">
                                         @include('admin.partials.action_buttons', [
                                             'menuItems' => [
@@ -46,31 +46,31 @@
                                                     'routeName' => 'javascript:void(0)',
                                                     'iconClass' => 'fa-regular fa-eye',
                                                     'className' => 'btn btn-primary view',
-                                                    'data-id' => $company->id,
+                                                    'data-id' => $admin->id,
                                                     'title' => 'Details',
                                                 ],
                                                 [
-                                                    'routeName' => 'company.company_edit',
-                                                    'params' => [$company->id],
+                                                    'routeName' => 'am.admin.admin_edit',
+                                                    'params' => [$admin->id],
                                                     'iconClass' => 'fa-regular fa-pen-to-square',
                                                     'className' => 'btn btn-info',
                                                     'title' => 'Edit',
                                                 ],
                                                 
                                                 [
-                                                    'routeName' => 'company.company_delete',
-                                                    'params' => [$company->id],
+                                                    'routeName' => 'am.admin.admin_delete',
+                                                    'params' => [$admin->id],
                                                     'iconClass' => 'fa-regular fa-trash-can',
                                                     'className' => 'btn btn-danger',
                                                     'title' => 'Delete',
                                                     'delete' => true,
                                                 ],
                                                 [
-                                                    'routeName' => 'company.status.company_edit',
-                                                    'params' => [$company->id],
+                                                    'routeName' => 'am.admin.status.admin_edit',
+                                                    'params' => [$admin->id],
                                                     'iconClass' => 'fa-solid fa-power-off',
-                                                    'className' => $company->getStatusClass(),
-                                                    'title' => $company->getStatusTitle(),
+                                                    'className' => $admin->getStatusClass(),
+                                                    'title' => $admin->getStatusTitle(),
                                                 ],
                                             ],
                                         ])
@@ -106,7 +106,7 @@
         $(document).ready(function() {
             $('.view').on('click', function() {
                 let id = $(this).data('id');
-                let url = ("{{ route('company.details.company_list', ['id']) }}");
+                let url = ("{{ route('am.admin.details.admin_list', ['id']) }}");
                 let _url = url.replace('id', id);
                 $.ajax({
                     url: _url,
@@ -124,14 +124,9 @@
                                         <td>${data.name}</td>
                                     </tr>
                                     <tr>
-                                        <th class="text-nowrap">Website</th>
+                                        <th class="text-nowrap">Email</th>
                                         <th>:</th>
-                                        <td><a href="${data.website_url}">${data.website_url}</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-nowrap">Note</th>
-                                        <th>:</th>
-                                        <td>${data.note}</td>
+                                        <td>${data.email}</td>
                                     </tr>
                                     <tr>
                                         <th class="text-nowrap">Status</th>

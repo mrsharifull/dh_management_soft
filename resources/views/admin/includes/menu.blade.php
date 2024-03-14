@@ -4,14 +4,20 @@
             [
                 'pageSlug' => 'dashboard',
                 'routeName' => 'admin.dashboard',
-                'iconClass' => 'fas fa-home',
+                'iconClass' => 'fa-solid fa-chart-line',
                 'label' => 'Dashboard',
             ],
             [
                 'pageSlug' => 'admin',
                 'routeName' => 'am.admin.admin_list',
-                'iconClass' => 'fas fa-home',
-                'label' => 'Admin',
+                'iconClass' => 'fa-solid fa-user-tie',
+                'label' => 'Admins',
+            ],
+            [
+                'pageSlug' => 'company',
+                'routeName' => 'company.company_list',
+                'iconClass' => 'fa-solid fa-shop-lock',
+                'label' => 'Companies',
             ],
         ],
     ])

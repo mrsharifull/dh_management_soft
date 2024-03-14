@@ -19,7 +19,7 @@
         <li class="nav-item">
             <a href="{{ route($menuItem['routeName'], $parameterArray) }}"
                 class="nav-link {{ $pageSlug == $menuItem['pageSlug'] ? 'active' : '' }}">
-                <i class="nav-icon {{ $menuItem['iconClass'] ?? 'far fa-circle' }}" @if(!isset($menuItem['iconClass'])) style="font-size: .9rem" @endif></i>
+                <i class="nav-icon {{ $menuItem['iconClass'] ?? 'fa-regular fa-circle' }} {{ $pageSlug == $menuItem['pageSlug'] ? 'fa-beat' : '' }}" @if(!isset($menuItem['iconClass'])) style="font-size: .9rem" @endif></i>
                 <p>{{ __($menuItem['label']) }}</p>
             </a>
         </li>
@@ -36,7 +36,7 @@
             @if ($showSub)
                 <li class="nav-item @if (isset($menuItem['pageSlug']) && collect($menuItem['pageSlug'])->contains($pageSlug)) menu-is-opening menu-open @endif" >
                     <a href="javascript:void(0)" class="nav-link @if (isset($menuItem['pageSlug']) && collect($menuItem['pageSlug'])->contains($pageSlug)) active @endif">
-                        <i class="far fa-circle nav-icon" style="font-size: .9rem"></i>
+                        <i class="fa-regular fa-circle nav-icon" style="font-size: .9rem"></i>
                         <p>
                             {{$menuItem['label']}}
                             <i class="right fas fa-angle-left"></i>
@@ -55,7 +55,7 @@
                             @if ($check)
                                 <li class="nav-item">
                                     <a href="{{ route($subMenu['subRouteName'], $subParameterArray) }}" class="nav-link @if (isset($subMenu['subPageSlug']) && $pageSlug == $subMenu['subPageSlug']) active @endif">
-                                        <i class="far fa-dot-circle nav-icon" style="font-size: .7rem"></i>
+                                        <i class="fa-regular fa-circle-dot nav-icon" style="font-size: .7rem"></i>
                                         <p>{{ _($subMenu['subLabel']) }}</p>
                                     </a>
                                 </li>

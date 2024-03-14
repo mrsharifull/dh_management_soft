@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -51,5 +52,17 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
             Route::get('status/{id}', 'status')->name('status.admin_edit');
             Route::get('delete/{id}', 'delete')->name('admin_delete');
         });
+    });
+
+    // Company Routes 
+    Route::controller(CompanyController::class, 'company')->prefix('company')->name('company.')->group(function () {
+        Route::get('index', 'index')->name('company_list');
+        Route::get('details/{id}', 'details')->name('details.company_list');
+        Route::get('create', 'create')->name('company_create');
+        Route::post('create', 'store')->name('company_create');
+        Route::get('edit/{id}', 'edit')->name('company_edit');
+        Route::put('edit/{id}', 'update')->name('company_edit');
+        Route::get('status/{id}', 'status')->name('status.company_edit');
+        Route::get('delete/{id}', 'delete')->name('company_delete');
     });
 });
