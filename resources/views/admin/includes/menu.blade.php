@@ -19,5 +19,11 @@
                 'iconClass' => 'fa-solid fa-shop-lock',
                 'label' => 'Companies',
             ],
+            [
+                'pageSlug' => 'hosting',
+                'routeName' => 'hosting.hosting_list',
+                'iconClass' => 'fa-solid fa-server',
+                'label' => 'Hostings',
+            ],
         ],
     ])
