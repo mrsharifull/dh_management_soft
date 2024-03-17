@@ -22,6 +22,7 @@
                             <tr>
                                 <th>{{ __('SL') }}</th>
                                 <th>{{ __('Name') }}</th>
+                                <th>{{ __('Company') }}</th>
                                 <th>{{ __('Username') }}</th>
                                 <th>{{ __('Admin URL') }}</th>
                                 <th>{{ __('Email') }}</th>
@@ -37,6 +38,7 @@
                                 <tr>
                                     <td> {{ $loop->iteration }} </td>
                                     <td>{{ $hosting->name }}</td>
+                                    <td>{{ $hosting->company->name }}</td>
                                     <td>{{ $hosting->username ?? '--' }}</td>
                                     <td><a target="_blank" href="{{$hosting->admin_url}}">{{removeHttpProtocol($hosting->admin_url)}}</a></td>
                                     <td>{{ $hosting->email }}</td>
@@ -130,9 +132,39 @@
                                         <td>${data.name}</td>
                                     </tr>
                                     <tr>
-                                        <th class="text-nowrap">Website</th>
+                                        <th class="text-nowrap">Company</th>
+                                        <th>:</th>
+                                        <td>${data.company.name}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-nowrap">Admin URL</th>
                                         <th>:</th>
                                         <td><a target="_blank" href="${data.admin_url}">${data.admin_url}</a></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-nowrap">Username</th>
+                                        <th>:</th>
+                                        <td>${data.username}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-nowrap">Email</th>
+                                        <th>:</th>
+                                        <td>${data.email}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-nowrap">Password</th>
+                                        <th>:</th>
+                                        <td>${data.password}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-nowrap">Purchase Date</th>
+                                        <th>:</th>
+                                        <td>${data.purchase_date}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-nowrap">Expire Date</th>
+                                        <th>:</th>
+                                        <td>${data.expire_date}</td>
                                     </tr>
                                     <tr>
                                         <th class="text-nowrap">Note</th>

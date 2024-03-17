@@ -24,10 +24,11 @@ class HostingController extends Controller
     }
     public function details($id): JsonResponse
     {
-        $data = Hosting::findOrFail($id);
+        $data = Hosting::with('company')->findOrFail($id);
         $data->admin_url = removeHttpProtocol($data->admin_url);
+        $data->username = $data->username ? $data->username : '--' ;
         $data->purchase_date = timeFormate($data->purchase_date);
-        $data->expire_date = !empty($data->expire_date) ? timeFormate($data->expire_date) : '--';
+        $data->expire_date = $data->expire_date ? timeFormate($data->expire_date) : '--';
         $data->creating_time = $data->created_date();
         $data->updating_time = $data->updated_date();
         $data->created_by = $data->created_user_name();
