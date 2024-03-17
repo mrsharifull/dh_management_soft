@@ -29,6 +29,7 @@ class HostingController extends Controller
         $data->username = $data->username ? $data->username : '--' ;
         $data->purchase_date = timeFormate($data->purchase_date);
         $data->expire_date = $data->expire_date ? timeFormate($data->expire_date) : '--';
+        $data->renew_date = $data->renew_date ? timeFormate($data->renew_date) : '--';
         $data->creating_time = $data->created_date();
         $data->updating_time = $data->updated_date();
         $data->created_by = $data->created_user_name();

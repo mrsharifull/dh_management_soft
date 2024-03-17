@@ -124,6 +124,9 @@
                         let status = data.status = 1 ? 'Active' : 'Deactive';
                         let statusClass = data.status = 1 ? 'badge-success' :
                             'badge-warning';
+                        let renew_status = (data.renew_date !== '--') ? 'Yes' : 'No';
+                        let renew_statusClass = (data.renew_date !== '--') ? 'badge-success' :
+                            'badge-warning';
                         var result = `
                                 <table class="table table-striped">
                                     <tr>
@@ -165,6 +168,16 @@
                                         <th class="text-nowrap">Purchase Date</th>
                                         <th>:</th>
                                         <td>${data.purchase_date}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-nowrap">Renew Status</th>
+                                        <th>:</th>
+                                        <td><span class="badge ${renew_statusClass}">${renew_status}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-nowrap">Renew Date</th>
+                                        <th>:</th>
+                                        <td>${data.renew_date}</td>
                                     </tr>
                                     <tr>
                                         <th class="text-nowrap">Expire Date</th>

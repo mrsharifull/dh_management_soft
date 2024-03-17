@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->date('purchase_date');
             $table->date('expire_date')->nullable();
+            $table->date('renew_date')->nullable();
             $table->longText('note')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();

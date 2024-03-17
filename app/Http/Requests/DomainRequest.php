@@ -23,6 +23,7 @@ class DomainRequest extends FormRequest
             'password' => 'required',
             'purchase_date' => 'required|date',
             'expire_date' => 'nullable|date',
+            'renew_data' => 'nullable|date',
             'note' => 'nullable',
         ];
     }
