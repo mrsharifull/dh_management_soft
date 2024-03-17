@@ -28,6 +28,7 @@
                                 <th>{{ __('Admin URL') }}</th>
                                 <th>{{ __('Email') }}</th>
                                 <th>{{ __('Password') }}</th>
+                                <th>{{ __('Website') }}</th>
                                 <th>{{ __('Status') }}</th>
                                 <th>{{ __('Created By') }}</th>
                                 <th class="text-center">{{ __('Action') }}</th>
@@ -45,6 +46,8 @@
                                     <td>{{ $domain->email }}</td>
                                     <td>{{ $domain->password }}</td>
                                     <td><span class="{{ $domain->getStatusBadgeClass() }}">{{ $domain->getStatus() }}</span>
+                                    </td>
+                                    <td><span class="{{ $domain->getDevelopedStatusBadgeClass() }}">{{ $domain->getDevelopedStatus() }}</span>
                                     </td>
                                     <td>{{ $domain->created_user_name()}}</td>
                                     <td class="text-center align-middle">
@@ -72,6 +75,13 @@
                                                     'className' => 'btn btn-danger',
                                                     'title' => 'Delete',
                                                     'delete' => true,
+                                                ],
+                                                [
+                                                    'routeName' => 'domain.status.domain_edit',
+                                                    'params' => [$domain->id],
+                                                    'iconClass' => 'fa-solid fa-power-off',
+                                                    'className' => $domain->getDevelopedStatusClass(),
+                                                    'title' => $domain->getDevelopedStatusTitle(),
                                                 ],
                                                 [
                                                     'routeName' => 'domain.status.domain_edit',
@@ -123,6 +133,9 @@
                     success: function(data) {
                         let status = data.status = 1 ? 'Active' : 'Deactive';
                         let statusClass = data.status = 1 ? 'badge-success' :
+                            'badge-warning';
+                        let developedStatus = data.is_developed = 1 ? 'Developed' : 'Not Developed';
+                        let developedStatusClass = data.is_developed = 1 ? 'badge-info' :
                             'badge-warning';
                         let renew_status = (data.renew_date !== '--') ? 'Yes' : 'No';
                         let renew_statusClass = (data.renew_date !== '--') ? 'badge-success' :
@@ -185,14 +198,19 @@
                                         <td>${data.expire_date}</td>
                                     </tr>
                                     <tr>
-                                        <th class="text-nowrap">Note</th>
+                                        <th class="text-nowrap">Website</th>
                                         <th>:</th>
-                                        <td>${data.note}</td>
+                                        <td><span class="badge ${developedStatusClass}">${developedStatus}</span></td>
                                     </tr>
                                     <tr>
                                         <th class="text-nowrap">Status</th>
                                         <th>:</th>
                                         <td><span class="badge ${statusClass}">${status}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-nowrap">Note</th>
+                                        <th>:</th>
+                                        <td>${data.note}</td>
                                     </tr>
                                     <tr>
                                         <th class="text-nowrap">Created At</th>

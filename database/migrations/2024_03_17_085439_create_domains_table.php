@@ -25,6 +25,7 @@ return new class extends Migration
             $table->date('renew_date')->nullable();
             $table->longText('note')->nullable();
             $table->boolean('status')->default(1);
+            $table->boolean('is_developed')->default(1);
             $table->timestamps();
             $table->softDeletes(); 
             $this->addAuditColumns($table);

@@ -87,6 +87,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
         Route::get('edit/{id}', 'edit')->name('domain_edit');
         Route::put('edit/{id}', 'update')->name('domain_edit');
         Route::get('status/{id}', 'status')->name('status.domain_edit');
+        Route::get('developed/{id}', 'developed')->name('developed.domain_edit');
         Route::get('delete/{id}', 'delete')->name('domain_delete');
     });
 });

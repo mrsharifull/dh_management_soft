@@ -16,6 +16,12 @@ trait AuditColumnsTrait{
         $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         $table->foreign('deleted_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
     }
+
+    public function addHostingDomainMorphedAuditColumns(Blueprint $table): void
+    {
+        $table->unsignedBigInteger('hd_id')->nullable();
+        $table->string('hd_type')->nullable();
+    }
     public function dropAuditColumns(Blueprint $table): void
     {
 

@@ -93,6 +93,13 @@ class DomainController extends Controller
         flash()->addSuccess('Domain '.$domain->name.' status updated successfully.');
         return redirect()->route('domain.domain_list');
     }
+    public function developed($id): RedirectResponse
+    {
+        $domain = Domain::findOrFail($id);
+        $this->developedStatusChange($domain);
+        flash()->addSuccess('Domain '.$domain->name.' developed status updated successfully.');
+        return redirect()->route('domain.domain_list');
+    }
     public function delete($id): RedirectResponse
     {
         $domain = Domain::findOrFail($id);
@@ -100,5 +107,16 @@ class DomainController extends Controller
         flash()->addSuccess('Domain '.$domain->name.' deleted successfully.');
         return redirect()->route('domain.domain_list');
 
+    }
+
+    private function developedStatusChange($modelData)
+    {
+        if($modelData->is_developed == 1){
+            $modelData->is_developed = 0;
+        }else{
+            $modelData->is_developed = 1;
+        }
+        $modelData->updated_by = admin()->id;
+        $modelData->update();
     }
 }
