@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\DomainController;
 use App\Http\Controllers\Admin\HostingController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use Illuminate\Support\Facades\Auth;
@@ -76,5 +77,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
         Route::put('edit/{id}', 'update')->name('hosting_edit');
         Route::get('status/{id}', 'status')->name('status.hosting_edit');
         Route::get('delete/{id}', 'delete')->name('hosting_delete');
+    });
+    // Domain Routes 
+    Route::controller(DomainController::class, 'domain')->prefix('domain')->name('domain.')->group(function () {
+        Route::get('index', 'index')->name('domain_list');
+        Route::get('details/{id}', 'details')->name('details.domain_list');
+        Route::get('create', 'create')->name('domain_create');
+        Route::post('create', 'store')->name('domain_create');
+        Route::get('edit/{id}', 'edit')->name('domain_edit');
+        Route::put('edit/{id}', 'update')->name('domain_edit');
+        Route::get('status/{id}', 'status')->name('status.domain_edit');
+        Route::get('delete/{id}', 'delete')->name('domain_delete');
     });
 });

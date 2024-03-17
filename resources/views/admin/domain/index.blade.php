@@ -1,17 +1,17 @@
-@extends('admin.layouts.app', ['pageSlug' => 'hosting'])
+@extends('admin.layouts.app', ['pageSlug' => 'domain'])
 
-@section('title', 'Hosting List')
+@section('title', 'Domain List')
 @section('content')
     <div class="row">
         <div class="col-12">
             <div class="card m-3">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3 class="card-title">{{ __('Hosting List') }}</h3>
+                    <h3 class="card-title">{{ __('Domain List') }}</h3>
                     <div class="button_ ms-auto">
                         @include('admin.partials.button', [
-                            'routeName' => 'hosting.hosting_create',
+                            'routeName' => 'domain.domain_create',
                             'className' => 'btn-outline-info',
-                            'label' => 'Add new hosting',
+                            'label' => 'Add new domain',
                         ])
                     </div>
 
@@ -21,6 +21,7 @@
                         <thead>
                             <tr>
                                 <th>{{ __('SL') }}</th>
+                                <th>{{ __('Hosting') }}</th>
                                 <th>{{ __('Name') }}</th>
                                 <th>{{ __('Company') }}</th>
                                 <th>{{ __('Username') }}</th>
@@ -29,24 +30,23 @@
                                 <th>{{ __('Password') }}</th>
                                 <th>{{ __('Status') }}</th>
                                 <th>{{ __('Created By') }}</th>
-                                <th>{{ __('Creation Date') }}</th>
                                 <th class="text-center">{{ __('Action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($hostings as $hosting)
+                            @foreach ($domains as $domain)
                                 <tr>
                                     <td> {{ $loop->iteration }} </td>
-                                    <td>{{ $hosting->name }}</td>
-                                    <td>{{ $hosting->company->name }}</td>
-                                    <td>{{ $hosting->username ?? '--' }}</td>
-                                    <td><a target="_blank" href="{{$hosting->admin_url}}">{{removeHttpProtocol($hosting->admin_url)}}</a></td>
-                                    <td>{{ $hosting->email }}</td>
-                                    <td>{{ $hosting->password }}</td>
-                                    <td><span class="{{ $hosting->getStatusBadgeClass() }}">{{ $hosting->getStatus() }}</span>
+                                    <td>{{ $domain->hosting->name ?? '--' }}</td>
+                                    <td>{{ $domain->name }}</td>
+                                    <td>{{ $domain->company->name }}</td>
+                                    <td>{{ $domain->username ?? '--' }}</td>
+                                    <td><a target="_blank" href="{{$domain->admin_url}}">{{removeHttpProtocol($domain->admin_url)}}</a></td>
+                                    <td>{{ $domain->email }}</td>
+                                    <td>{{ $domain->password }}</td>
+                                    <td><span class="{{ $domain->getStatusBadgeClass() }}">{{ $domain->getStatus() }}</span>
                                     </td>
-                                    <td>{{ $hosting->created_user_name()}}</td>
-                                    <td>{{$hosting->created_date()}}</td>
+                                    <td>{{ $domain->created_user_name()}}</td>
                                     <td class="text-center align-middle">
                                         @include('admin.partials.action_buttons', [
                                             'menuItems' => [
@@ -54,31 +54,31 @@
                                                     'routeName' => 'javascript:void(0)',
                                                     'iconClass' => 'fa-regular fa-eye',
                                                     'className' => 'btn btn-primary view',
-                                                    'data-id' => $hosting->id,
+                                                    'data-id' => $domain->id,
                                                     'title' => 'Details',
                                                 ],
                                                 [
-                                                    'routeName' => 'hosting.hosting_edit',
-                                                    'params' => [$hosting->id],
+                                                    'routeName' => 'domain.domain_edit',
+                                                    'params' => [$domain->id],
                                                     'iconClass' => 'fa-regular fa-pen-to-square',
                                                     'className' => 'btn btn-info',
                                                     'title' => 'Edit',
                                                 ],
                                                 
                                                 [
-                                                    'routeName' => 'hosting.hosting_delete',
-                                                    'params' => [$hosting->id],
+                                                    'routeName' => 'domain.domain_delete',
+                                                    'params' => [$domain->id],
                                                     'iconClass' => 'fa-regular fa-trash-can',
                                                     'className' => 'btn btn-danger',
                                                     'title' => 'Delete',
                                                     'delete' => true,
                                                 ],
                                                 [
-                                                    'routeName' => 'hosting.status.hosting_edit',
-                                                    'params' => [$hosting->id],
+                                                    'routeName' => 'domain.status.domain_edit',
+                                                    'params' => [$domain->id],
                                                     'iconClass' => 'fa-solid fa-power-off',
-                                                    'className' => $hosting->getStatusClass(),
-                                                    'title' => $hosting->getStatusTitle(),
+                                                    'className' => $domain->getStatusClass(),
+                                                    'title' => $domain->getStatusTitle(),
                                                 ],
                                             ],
                                         ])
@@ -98,7 +98,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ __('Hosting Details') }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('Domain Details') }}</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -114,7 +114,7 @@
         $(document).ready(function() {
             $('.view').on('click', function() {
                 let id = $(this).data('id');
-                let url = ("{{ route('hosting.details.hosting_list', ['id']) }}");
+                let url = ("{{ route('domain.details.domain_list', ['id']) }}");
                 let _url = url.replace('id', id);
                 $.ajax({
                     url: _url,
@@ -126,6 +126,11 @@
                             'badge-warning';
                         var result = `
                                 <table class="table table-striped">
+                                    <tr>
+                                        <th class="text-nowrap">Hosting</th>
+                                        <th>:</th>
+                                        <td>${data.hosting ? data.hosting.name : '--'}</td>
+                                    </tr>
                                     <tr>
                                         <th class="text-nowrap">Name</th>
                                         <th>:</th>

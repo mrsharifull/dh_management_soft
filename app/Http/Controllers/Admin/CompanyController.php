@@ -18,7 +18,7 @@ class CompanyController extends Controller
 
     public function index(): View
     {
-        $data['companies'] = Company::with('created_user')->latest()->get();
+        $data['companies'] = Company::with(['created_user','domains','hostings'])->latest()->get();
         return view('admin.company.index',$data);
     }
     public function details($id): JsonResponse

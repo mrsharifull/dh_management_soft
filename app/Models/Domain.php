@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hosting extends BaseModel
+class Domain extends BaseModel
 {
     use HasFactory;
     public function company()
     {
         return $this->belongsTo(Company::class, 'company_id');
     }
-    public function domains()
+    public function hosting()
     {
-        return $this->hasMany(Domain::class, 'hosting_id');
+        return $this->belongsTo(Hosting::class, 'hosting_id');
     }
 }

@@ -25,5 +25,11 @@
                 'iconClass' => 'fa-solid fa-server',
                 'label' => 'Hostings',
             ],
+            [
+                'pageSlug' => 'domain',
+                'routeName' => 'domain.domain_list',
+                'iconClass' => 'fa-solid fa-globe',
+                'label' => 'Domains',
+            ],
         ],
     ])

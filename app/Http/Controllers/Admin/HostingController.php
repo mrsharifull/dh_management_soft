@@ -19,7 +19,7 @@ class HostingController extends Controller
 
     public function index(): View
     {
-        $data['hostings'] = Hosting::with(['created_user','company'])->latest()->get();
+        $data['hostings'] = Hosting::with(['created_user','company','domains'])->latest()->get();
         return view('admin.hosting.index',$data);
     }
     public function details($id): JsonResponse
