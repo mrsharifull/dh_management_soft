@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->enum('payment_for',['hosting','domain']);
+            $table->enum('payment_for',['Hosting','Domain']);
             $this->addHostingDomainMorphedAuditColumns($table);
-            $table->enum('payment_type',['first-payment','renew']);
+            $table->enum('payment_type',['First-payment','Renew']);
+            $table->date('payment_date');
             $table->float('price');
             $table->float('duration');
-            $table->enum('duration_type',['month','year']);
+            $table->enum('duration_type',['Month','Year']);
             $table->string('file')->nullable();
             $table->timestamps();
             $table->softDeletes();

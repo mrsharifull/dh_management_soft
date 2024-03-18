@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\DomainController;
 use App\Http\Controllers\Admin\HostingController;
+use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -89,5 +90,20 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
         Route::get('status/{id}', 'status')->name('status.domain_edit');
         Route::get('developed/{id}', 'developed')->name('developed.domain_edit');
         Route::get('delete/{id}', 'delete')->name('domain_delete');
+    });
+
+    // Payment Routes 
+    Route::controller(PaymentController::class, 'payment')->prefix('payment')->name('payment.')->group(function () {
+        Route::get('index', 'index')->name('payment_list');
+        Route::get('details/{id}', 'details')->name('details.payment_list');
+        Route::get('create', 'create')->name('payment_create');
+        Route::post('create', 'store')->name('payment_create');
+        Route::get('edit/{id}', 'edit')->name('payment_edit');
+        Route::put('edit/{id}', 'update')->name('payment_edit');
+        Route::get('status/{id}', 'status')->name('status.payment_edit');
+        Route::get('developed/{id}', 'developed')->name('developed.payment_edit');
+        Route::get('delete/{id}', 'delete')->name('payment_delete');
+
+        Route::get('get-hostings-or-domains/{payment_for}', 'get_hostings_or_domains')->name('get_hostings_or_domains.payment_list');
     });
 });

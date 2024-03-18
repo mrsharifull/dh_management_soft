@@ -1,17 +1,17 @@
-@extends('admin.layouts.app', ['pageSlug' => 'domain'])
+@extends('admin.layouts.app', ['pageSlug' => 'payment'])
 
-@section('title', 'Domain List')
+@section('title', 'Payment List')
 @section('content')
     <div class="row">
         <div class="col-12">
             <div class="card m-3">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3 class="card-title">{{ __('Domain List') }}</h3>
+                    <h3 class="card-title">{{ __('Payment List') }}</h3>
                     <div class="button_ ms-auto">
                         @include('admin.partials.button', [
-                            'routeName' => 'domain.domain_create',
+                            'routeName' => 'payment.payment_create',
                             'className' => 'btn-outline-info',
-                            'label' => 'Add new domain',
+                            'label' => 'Add new payment',
                         ])
                     </div>
 
@@ -21,35 +21,25 @@
                         <thead>
                             <tr>
                                 <th>{{ __('SL') }}</th>
-                                <th>{{ __('Hosting') }}</th>
-                                <th>{{ __('Name') }}</th>
-                                <th>{{ __('Company') }}</th>
-                                <th>{{ __('Username') }}</th>
-                                <th>{{ __('Admin URL') }}</th>
-                                <th>{{ __('Email') }}</th>
-                                <th>{{ __('Password') }}</th>
-                                <th>{{ __('Website') }}</th>
-                                <th>{{ __('Status') }}</th>
+                                <th>{{ __('Payment For') }}</th>
+                                <th>{{ __('Domain/Hosting') }}</th>
+                                <th>{{ __('Payment Type') }}</th>
+                                <th>{{ __('Price') }}</th>
+                                <th>{{ __('Duration') }}</th>
                                 <th>{{ __('Created By') }}</th>
                                 <th class="text-center">{{ __('Action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($domains as $domain)
+                            @foreach ($payments as $payment)
                                 <tr>
                                     <td> {{ $loop->iteration }} </td>
-                                    <td>{{ $domain->hosting->name ?? '--' }}</td>
-                                    <td>{{ $domain->name }}</td>
-                                    <td>{{ $domain->company->name }}</td>
-                                    <td>{{ $domain->username ?? '--' }}</td>
-                                    <td><a target="_blank" href="{{$domain->admin_url}}">{{removeHttpProtocol($domain->admin_url)}}</a></td>
-                                    <td>{{ $domain->email }}</td>
-                                    <td>{{ $domain->password }}</td>
-                                    <td><span class="{{ $domain->getStatusBadgeClass() }}">{{ $domain->getStatus() }}</span>
-                                    </td>
-                                    <td><span class="{{ $domain->getDevelopedStatusBadgeClass() }}">{{ $domain->getDevelopedStatus() }}</span>
-                                    </td>
-                                    <td>{{ $domain->created_user_name()}}</td>
+                                    <td> {{ $payment->payment_for }} </td>
+                                    <td> {{ $payment->domain_or_hosting_name(); }} </td>
+                                    <td> {{ $payment->payment_type }} </td>
+                                    <td> {{ number_format($payment->price,2) }} </td>
+                                    <td> {{ $payment->duration .' '.$payment->duration_type }} </td>
+                                    <td>{{ $payment->created_user_name()}}</td>
                                     <td class="text-center align-middle">
                                         @include('admin.partials.action_buttons', [
                                             'menuItems' => [
@@ -57,38 +47,38 @@
                                                     'routeName' => 'javascript:void(0)',
                                                     'iconClass' => 'fa-regular fa-eye',
                                                     'className' => 'btn btn-primary view',
-                                                    'data-id' => $domain->id,
+                                                    'data-id' => $payment->id,
                                                     'title' => 'Details',
                                                 ],
                                                 [
-                                                    'routeName' => 'domain.domain_edit',
-                                                    'params' => [$domain->id],
+                                                    'routeName' => 'payment.payment_edit',
+                                                    'params' => [$payment->id],
                                                     'iconClass' => 'fa-regular fa-pen-to-square',
                                                     'className' => 'btn btn-info',
                                                     'title' => 'Edit',
                                                 ],
                                                 
                                                 [
-                                                    'routeName' => 'domain.domain_delete',
-                                                    'params' => [$domain->id],
+                                                    'routeName' => 'payment.payment_delete',
+                                                    'params' => [$payment->id],
                                                     'iconClass' => 'fa-regular fa-trash-can',
                                                     'className' => 'btn btn-danger',
                                                     'title' => 'Delete',
                                                     'delete' => true,
                                                 ],
                                                 [
-                                                    'routeName' => 'domain.developed.domain_edit',
-                                                    'params' => [$domain->id],
-                                                    'iconClass' => $domain->getDevelopedStatusIcon(),
-                                                    'className' => $domain->getDevelopedStatusClass(),
-                                                    'title' => $domain->getDevelopedStatusTitle(),
+                                                    'routeName' => 'payment.developed.payment_edit',
+                                                    'params' => [$payment->id],
+                                                    'iconClass' => $payment->getDevelopedStatusIcon(),
+                                                    'className' => $payment->getDevelopedStatusClass(),
+                                                    'title' => $payment->getDevelopedStatusTitle(),
                                                 ],
                                                 [
-                                                    'routeName' => 'domain.status.domain_edit',
-                                                    'params' => [$domain->id],
+                                                    'routeName' => 'payment.status.payment_edit',
+                                                    'params' => [$payment->id],
                                                     'iconClass' => 'fa-solid fa-power-off',
-                                                    'className' => $domain->getStatusClass(),
-                                                    'title' => $domain->getStatusTitle(),
+                                                    'className' => $payment->getStatusClass(),
+                                                    'title' => $payment->getStatusTitle(),
                                                 ],
                                             ],
                                         ])
@@ -108,7 +98,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ __('Domain Details') }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('payment Details') }}</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -124,7 +114,7 @@
         $(document).ready(function() {
             $('.view').on('click', function() {
                 let id = $(this).data('id');
-                let url = ("{{ route('domain.details.domain_list', ['id']) }}");
+                let url = ("{{ route('payment.details.payment_list', ['id']) }}");
                 let _url = url.replace('id', id);
                 $.ajax({
                     url: _url,

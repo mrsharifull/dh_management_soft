@@ -31,5 +31,11 @@
                 'iconClass' => 'fa-solid fa-globe',
                 'label' => 'Domains',
             ],
+            [
+                'pageSlug' => 'payment',
+                'routeName' => 'payment.payment_list',
+                'iconClass' => 'fa-regular fa-money-bill-1',
+                'label' => 'Payments',
+            ],
         ],
     ])
