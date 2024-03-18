@@ -77,9 +77,9 @@
                                                     'delete' => true,
                                                 ],
                                                 [
-                                                    'routeName' => 'domain.status.domain_edit',
+                                                    'routeName' => 'domain.developed.domain_edit',
                                                     'params' => [$domain->id],
-                                                    'iconClass' => 'fa-solid fa-power-off',
+                                                    'iconClass' => $domain->getDevelopedStatusIcon(),
                                                     'className' => $domain->getDevelopedStatusClass(),
                                                     'title' => $domain->getDevelopedStatusTitle(),
                                                 ],
