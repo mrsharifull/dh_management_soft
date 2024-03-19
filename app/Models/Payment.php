@@ -9,11 +9,11 @@ class Payment extends BaseModel
 {
     use HasFactory;
 
-    public function domainOrHosting()
+    public function hd()
     {
         return $this->morphTo();
     }
     public function scopeDomain_or_hosting_name(){
-        return $this->domainOrHosting->name;
+        return $this->hd->name;
     }
 }

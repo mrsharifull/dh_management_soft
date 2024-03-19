@@ -17,30 +17,71 @@
 
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('payment.payment_create') }}" method="POST">
+                    <form action="{{ route('payment.payment_create') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="payment_for">{{ __('Payment For') }}</label>
-                                <select name="payment_for" id="payment_for" class="form-control">
-                                    <option selected hidden value="">{{__('Select Payment For')}}</option>
-                                    <option value="Hosting" {{(old('payment_for') =='Hosting') ? 'selected' : ''}}>{{__('Hosting')}}</option>
-                                    <option value="Domain" {{(old('payment_for') =='Domain') ? 'selected' : ''}}>{{__('Domain')}}</option>
-                                </select>
-                                @include('alerts.feedback', ['field' => 'payment_for'])
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="payment_for">{{ __('Payment For') }}</label>
+                                    <select name="payment_for" id="payment_for" class="form-control">
+                                        <option selected hidden value="">{{__('Select Payment For')}}</option>
+                                        <option value="Hosting" {{(old('payment_for') =='Hosting') ? 'selected' : ''}}>{{__('Hosting')}}</option>
+                                        <option value="Domain" {{(old('payment_for') =='Domain') ? 'selected' : ''}}>{{__('Domain')}}</option>
+                                    </select>
+                                    @include('alerts.feedback', ['field' => 'payment_for'])
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="hd_id" id="dh_label">{{ __('Hosting/Domain') }}</label>
+                                    <select name="hd_id" id="hd_id" class="form-control" disabled>
+                                        <option selected hidden value="">{{__('Select Hosting/Domain')}}</option>
+                                    </select>
+                                    @include('alerts.feedback', ['field' => 'hd_id'])
+                                </div>
+                                
+                                <div class="form-group col-md-6">
+                                    <label for="payment_type">{{ __('Payment Type') }}</label>
+                                    <select name="payment_type" id="payment_type" class="form-control">
+                                        <option selected hidden value="">{{__('Select Payment For')}}</option>
+                                        <option value="First-payment" {{(old('payment_type') =='First-payment') ? 'selected' : ''}}>{{__('First-payment')}}</option>
+                                        <option value="Renew" {{(old('payment_type') =='Renew') ? 'selected' : ''}}>{{__('Renew')}}</option>
+                                    </select>
+                                    @include('alerts.feedback', ['field' => 'payment_type'])
+                                </div>
+    
+                                <div class="form-group col-md-6">
+                                    <label for="payment_date">{{ __('Payment Date') }}</label>
+                                    <input type="date" name="payment_date" id="payment_date" class="form-control" value="{{old('payment_date')}}">
+                                    @include('alerts.feedback', ['field' => 'payment_date'])
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="price">{{ __('Price') }}</label>
+                                    <div class="input-group" role="group">
+                                        <input type="text" name="price" placeholder="Enter price" id="price" class="form-control" value="{{old('price')}}">
+                                        <span class="btn btn-sm btn-secondary disabled" style="line-height: 2">{{__('BDT')}}</span>
+                                    </div>
+                                    @include('alerts.feedback', ['field' => 'price'])
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="duration">{{ __('Duration') }}</label>
+                                    <div class="input-group" role="group">
+                                        <input type="text" name="duration" placeholder="Enter duration" id="duration" class="form-control" value="{{old('duration')}}">
+                                        <select name="duration_type" class="form-control">
+                                            <option selected hidden value="">{{__('Select type')}}</option>
+                                            <option value="Year" {{(old('duration_type') =='Year') ? 'selected' : ''}}>{{__('Year')}}</option>
+                                            <option value="Month" {{(old('duration_type') =='Month') ? 'selected' : ''}}>{{__('Month')}}</option>
+                                        </select>
+                                    </div>
+                                    @include('alerts.feedback', ['field' => 'price'])
+                                </div>
+                                <div class="form-group">
+                                    <label for="file">{{ __('Upload') }}</label>
+                                    <input type="file" name="file" id="file" class="form-control">
+                                    @include('alerts.feedback', ['field' => 'file'])
+                                </div>
                             </div>
-
-
-                            <div class="form-group">
-                                <label for="dh_id" id="dh_label">{{ __('Hosting/Domain') }}</label>
-                                <select name="dh_id" id="dh_id" class="form-control" disabled>
-                                    <option selected hidden value="">{{__('Select Hosting/Domain')}}</option>
-                                </select>
-                                @include('alerts.feedback', ['field' => 'dh_id'])
-                            </div> 
                         </div>
 
-                        <div class="card-footer">
+                        <div class="card-footer text-end">
                             <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
                         </div>
                     </form>
@@ -68,8 +109,8 @@
                    response.datas.forEach(function(data) {
                         result += `<option value='${data.id}'>${data.name}</option>`;
                     });
-                    $('#dh_id').html(result); 
-                    $('#dh_id').prop('disabled',false); 
+                    $('#hd_id').html(result); 
+                    $('#hd_id').prop('disabled',false); 
                      
                 },
                 error: function(xhr, status, error) {

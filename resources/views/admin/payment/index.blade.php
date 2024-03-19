@@ -35,7 +35,7 @@
                                 <tr>
                                     <td> {{ $loop->iteration }} </td>
                                     <td> {{ $payment->payment_for }} </td>
-                                    <td> {{ $payment->domain_or_hosting_name(); }} </td>
+                                    <td> {{ $payment->domain_or_hosting_name()." ($payment->payment_for)" }} </td>
                                     <td> {{ $payment->payment_type }} </td>
                                     <td> {{ number_format($payment->price,2) }} </td>
                                     <td> {{ $payment->duration .' '.$payment->duration_type }} </td>
@@ -66,20 +66,6 @@
                                                     'title' => 'Delete',
                                                     'delete' => true,
                                                 ],
-                                                [
-                                                    'routeName' => 'payment.developed.payment_edit',
-                                                    'params' => [$payment->id],
-                                                    'iconClass' => $payment->getDevelopedStatusIcon(),
-                                                    'className' => $payment->getDevelopedStatusClass(),
-                                                    'title' => $payment->getDevelopedStatusTitle(),
-                                                ],
-                                                [
-                                                    'routeName' => 'payment.status.payment_edit',
-                                                    'params' => [$payment->id],
-                                                    'iconClass' => 'fa-solid fa-power-off',
-                                                    'className' => $payment->getStatusClass(),
-                                                    'title' => $payment->getStatusTitle(),
-                                                ],
                                             ],
                                         ])
                                     </td>
@@ -92,13 +78,13 @@
         </div>
     </div>
 
-    {{-- Admin Details Modal  --}}
+    {{-- Payment Details Modal  --}}
     <div class="modal view_modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ __('payment Details') }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('Payment Details') }}</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -121,86 +107,37 @@
                     method: 'GET',
                     dataType: 'json',
                     success: function(data) {
-                        let status = data.status = 1 ? 'Active' : 'Deactive';
-                        let statusClass = data.status = 1 ? 'badge-success' :
-                            'badge-warning';
-                        let developedStatus = data.is_developed == 1 ? 'Developed' : 'Not Developed';
-                        let developedStatusClass = data.is_developed == 1 ? 'badge-info' :
-                            'badge-warning';
-                        let renew_status = (data.renew_date !== '--') ? 'Yes' : 'No';
-                        let renew_statusClass = (data.renew_date !== '--') ? 'badge-success' :
-                            'badge-warning';
                         var result = `
                                 <table class="table table-striped">
                                     <tr>
-                                        <th class="text-nowrap">Hosting</th>
+                                        <th class="text-nowrap">Payment For</th>
                                         <th>:</th>
-                                        <td>${data.hosting ? data.hosting.name : '--'}</td>
+                                        <td>${data.payment_for}</td>
                                     </tr>
                                     <tr>
-                                        <th class="text-nowrap">Name</th>
+                                        <th class="text-nowrap">Domain/Hosting</th>
                                         <th>:</th>
-                                        <td>${data.name}</td>
+                                        <td>${data.hd.name} (${data.payment_for})</td>
                                     </tr>
                                     <tr>
-                                        <th class="text-nowrap">Company</th>
+                                        <th class="text-nowrap">Payment Type</th>
                                         <th>:</th>
-                                        <td>${data.company.name}</td>
+                                        <td>${data.payment_type}</td>
                                     </tr>
                                     <tr>
-                                        <th class="text-nowrap">Admin URL</th>
+                                        <th class="text-nowrap">Payment Date</th>
                                         <th>:</th>
-                                        <td><a target="_blank" href="${data.admin_url}">${data.admin_url}</a></td>
+                                        <td>${data.payment_date}</td>
                                     </tr>
                                     <tr>
-                                        <th class="text-nowrap">Username</th>
+                                        <th class="text-nowrap">Price</th>
                                         <th>:</th>
-                                        <td>${data.username}</td>
+                                        <td>${data.price} Tk</td>
                                     </tr>
                                     <tr>
-                                        <th class="text-nowrap">Email</th>
+                                        <th class="text-nowrap">Duration</th>
                                         <th>:</th>
-                                        <td>${data.email}</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-nowrap">Password</th>
-                                        <th>:</th>
-                                        <td>${data.password}</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-nowrap">Purchase Date</th>
-                                        <th>:</th>
-                                        <td>${data.purchase_date}</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-nowrap">Renew Status</th>
-                                        <th>:</th>
-                                        <td><span class="badge ${renew_statusClass}">${renew_status}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-nowrap">Renew Date</th>
-                                        <th>:</th>
-                                        <td>${data.renew_date}</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-nowrap">Expire Date</th>
-                                        <th>:</th>
-                                        <td>${data.expire_date}</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-nowrap">Website</th>
-                                        <th>:</th>
-                                        <td><span class="badge ${developedStatusClass}">${developedStatus}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-nowrap">Status</th>
-                                        <th>:</th>
-                                        <td><span class="badge ${statusClass}">${status}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-nowrap">Note</th>
-                                        <th>:</th>
-                                        <td>${data.note}</td>
+                                        <td>${data.duration} ${data.duration_type}</td>
                                     </tr>
                                     <tr>
                                         <th class="text-nowrap">Created At</th>

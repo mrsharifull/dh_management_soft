@@ -21,9 +21,9 @@ class DomainRequest extends FormRequest
             'username' => 'nullable',
             'email' => 'required|email',
             'password' => 'required',
-            'purchase_date' => 'required|date',
+            'purchase_date' => 'required|date|before_or_equal:today',
             'expire_date' => 'nullable|date',
-            'renew_data' => 'nullable|date',
+            'renew_data' => 'nullable|date|before_or_equal:today',
             'note' => 'nullable',
         ];
     }
