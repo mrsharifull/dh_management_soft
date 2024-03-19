@@ -115,7 +115,7 @@
                                         <td>${data.payment_for}</td>
                                     </tr>
                                     <tr>
-                                        <th class="text-nowrap">Domain/Hosting</th>
+                                        <th class="text-nowrap">${data.payment_for}</th>
                                         <th>:</th>
                                         <td>${data.hd.name} (${data.payment_for})</td>
                                     </tr>

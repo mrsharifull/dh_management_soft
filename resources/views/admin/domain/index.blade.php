@@ -25,7 +25,7 @@
                                 <th>{{ __('Name') }}</th>
                                 <th>{{ __('Company') }}</th>
                                 <th>{{ __('Username') }}</th>
-                                <th>{{ __('Admin URL') }}</th>
+                                <th>{{ __('Login URL') }}</th>
                                 <th>{{ __('Email') }}</th>
                                 <th>{{ __('Password') }}</th>
                                 <th>{{ __('Website') }}</th>
@@ -158,7 +158,7 @@
                                         <td>${data.company.name}</td>
                                     </tr>
                                     <tr>
-                                        <th class="text-nowrap">Admin URL</th>
+                                        <th class="text-nowrap">Login URL</th>
                                         <th>:</th>
                                         <td><a target="_blank" href="${data.admin_url}">${data.admin_url}</a></td>
                                     </tr>

@@ -48,7 +48,7 @@
                                 @include('alerts.feedback', ['field' => 'company_id'])
                             </div>
                             <div class="form-group">
-                                <label for="admin_url">{{ __('Admin URL') }}</label>
+                                <label for="admin_url">{{ __('Login URL') }}</label>
                                 <input type="url" class="form-control {{ $errors->has('admin_url') ? ' is-invalid' : '' }}"
                                     id="admin_url" name="admin_url" value="{{ $domain->admin_url }}" placeholder="Enter admin url">
                                 @include('alerts.feedback', ['field' => 'admin_url'])
