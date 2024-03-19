@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Domain;
+use App\Models\Hosting;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -14,6 +16,8 @@ class DashboardController extends Controller
     }
     public function dashboard(): View
     {
-        return view('admin.dashboard.dashboard');
+        $data['hostings'] = Hosting::latest()->get();
+        $data['domains'] = Domain::latest()->get();
+        return view('admin.dashboard.dashboard',$data);
     }
 }
