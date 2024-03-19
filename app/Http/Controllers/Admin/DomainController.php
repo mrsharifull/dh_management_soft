@@ -59,7 +59,7 @@ class DomainController extends Controller
         $domain->created_by = admin()->id;
         $domain->save();
         flash()->addSuccess('Domain '.$domain->name.' created successfully.');
-        return redirect()->route('domain.domain_list');
+        return redirect()->route('payment.payment_create');
     }
     public function edit($id): View
     {

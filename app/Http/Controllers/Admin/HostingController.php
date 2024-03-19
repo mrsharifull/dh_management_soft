@@ -56,7 +56,7 @@ class HostingController extends Controller
         $hosting->created_by = admin()->id;
         $hosting->save();
         flash()->addSuccess('Hosting '.$hosting->name.' created successfully.');
-        return redirect()->route('hosting.hosting_list');
+        return redirect()->route('payment.payment_create');
     }
     public function edit($id): View
     {
