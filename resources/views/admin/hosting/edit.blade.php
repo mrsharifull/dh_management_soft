@@ -62,12 +62,6 @@
                                 @include('alerts.feedback', ['field' => 'password'])
                             </div>
                             <div class="form-group">
-                                <label for="purchase_date">{{ __('Purchase Date') }}</label>
-                                <input type="date" class="form-control {{ $errors->has('purchase_date') ? ' is-invalid' : '' }}"
-                                    id="purchase_date" name="purchase_date" value="{{ $hosting->purchase_date }}" placeholder="Enter purchase_date">
-                                @include('alerts.feedback', ['field' => 'purchase_date'])
-                            </div>
-                            <div class="form-group">
                                 <label for="note">{{ __('Note') }}</label>
                                 <textarea name="note" id="note" class="form-control" placeholder="Note...">{{$hosting->note}}</textarea>
                                 @include('alerts.feedback', ['field' => 'note'])

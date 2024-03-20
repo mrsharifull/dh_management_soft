@@ -27,7 +27,7 @@ class HostingController extends Controller
         $data = Hosting::with('company')->findOrFail($id);
         $data->admin_url = removeHttpProtocol($data->admin_url);
         $data->username = $data->username ? $data->username : '--' ;
-        $data->purchase_date = timeFormate($data->purchase_date);
+        $data->purchase_date = $data->purchase_date ? timeFormate($data->purchase_date) : '--';
         $data->expire_date = $data->expire_date ? timeFormate($data->expire_date) : '--';
         $data->renew_date = $data->renew_date ? timeFormate($data->renew_date) : '--';
         $data->creating_time = $data->created_date();
@@ -50,7 +50,6 @@ class HostingController extends Controller
         $hosting->username = $req->username;
         $hosting->email = $req->email;
         $hosting->password = $req->password;
-        $hosting->purchase_date = $req->purchase_date;
         $hosting->expire_date = $req->expire_date;
         $hosting->note = $req->note;
         $hosting->created_by = admin()->id;
@@ -73,7 +72,6 @@ class HostingController extends Controller
         $hosting->username = $req->username;
         $hosting->email = $req->email;
         $hosting->password = $req->password;
-        $hosting->purchase_date = $req->purchase_date;
         $hosting->expire_date = $req->expire_date;
         $hosting->note = $req->note;
         $hosting->updated_by = admin()->id;

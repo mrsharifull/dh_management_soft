@@ -28,7 +28,7 @@ class DomainController extends Controller
         $data = Domain::with(['company','hosting'])->findOrFail($id);
         $data->admin_url = removeHttpProtocol($data->admin_url);
         $data->username = $data->username ? $data->username : '--' ;
-        $data->purchase_date = timeFormate($data->purchase_date);
+        $data->purchase_date = $data->purchase_date ? timeFormate($data->purchase_date) : '--';
         $data->expire_date = $data->expire_date ? timeFormate($data->expire_date) : '--';
         $data->renew_date = $data->renew_date ? timeFormate($data->renew_date) : '--';
         $data->creating_time = $data->created_date();
@@ -53,7 +53,6 @@ class DomainController extends Controller
         $domain->username = $req->username;
         $domain->email = $req->email;
         $domain->password = $req->password;
-        $domain->purchase_date = $req->purchase_date;
         $domain->expire_date = $req->expire_date;
         $domain->note = $req->note;
         $domain->created_by = admin()->id;
@@ -78,7 +77,6 @@ class DomainController extends Controller
         $domain->username = $req->username;
         $domain->email = $req->email;
         $domain->password = $req->password;
-        $domain->purchase_date = $req->purchase_date;
         $domain->expire_date = $req->expire_date;
         $domain->note = $req->note;
         $domain->updated_by = admin()->id;

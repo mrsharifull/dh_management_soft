@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->enum('payment_for',['Hosting','Domain']);
             $this->addHostingDomainMorphedAuditColumns($table);
-            $table->enum('payment_type',['First-payment','Renew']);
+            $table->enum('payment_type',['First-payment','Renew-payment','Due-payment']);
             $table->date('payment_date');
             $table->float('price');
-            $table->float('duration');
             $table->enum('duration_type',['Month','Year']);
             $table->string('file')->nullable();
             $table->timestamps();

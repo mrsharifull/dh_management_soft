@@ -18,10 +18,11 @@ class PaymentRequest extends FormRequest
         return [
             'payment_for' => 'required|in:"Hosting","Domain"',
             'payment_type' => 'required|in:"First-payment","Renew"',
-            'duration_type' => 'required|in:"Month","Year"',
+            'duration_type' => 'nullable|in:"Month","Year"',
             'payment_date' => 'required|date|before_or_equal:today',
+            'expiry_date' => 'nullable|date',
             'price' => 'required|numeric|min:0',
-            'duration' => 'required|numeric|min:1',
+            'duration' => 'nullable|numeric|min:1',
             'hd_id' => 'required',
 
             

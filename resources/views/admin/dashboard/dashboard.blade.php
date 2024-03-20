@@ -46,8 +46,21 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3 col-6">
+        <div class="row row-cols-5">
+            <div class="col">
+
+                <div class="small-box bg-primary">
+                    <div class="inner">
+                        <h3>{{$companies->count()}}</h3>
+                        <p>{{__('Total Companies')}}</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="{{route('company.company_list')}}" class="small-box-footer">{{__('More info')}} <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col">
 
                 <div class="small-box bg-info">
                     <div class="inner">
@@ -61,7 +74,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-6">
+            <div class="col">
 
                 <div class="small-box bg-success">
                     <div class="inner">
@@ -75,7 +88,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-6">
+            <div class="col">
 
                 <div class="small-box bg-warning">
                     <div class="inner">
@@ -89,7 +102,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-6">
+            <div class="col">
 
                 <div class="small-box bg-danger">
                     <div class="inner">

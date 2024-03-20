@@ -43,7 +43,8 @@
                                     <select name="payment_type" id="payment_type" class="form-control">
                                         <option selected hidden value="">{{__('Select Payment For')}}</option>
                                         <option value="First-payment" {{(old('payment_type') =='First-payment') ? 'selected' : ''}}>{{__('First-payment')}}</option>
-                                        <option value="Renew" {{(old('payment_type') =='Renew') ? 'selected' : ''}}>{{__('Renew')}}</option>
+                                        <option value="Renew-payment" {{(old('payment_type') =='Renew-payment') ? 'selected' : ''}}>{{__('Renew-payment')}}</option>
+                                        <option value="Due-payment" {{(old('payment_type') =='Due-payment') ? 'selected' : ''}}>{{__('Due-payment')}}</option>
                                     </select>
                                     @include('alerts.feedback', ['field' => 'payment_type'])
                                 </div>
@@ -61,7 +62,7 @@
                                     </div>
                                     @include('alerts.feedback', ['field' => 'price'])
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-6" id="is_duration">
                                     <label for="duration">{{ __('Duration') }}</label>
                                     <div class="input-group" role="group">
                                         <input type="text" name="duration" placeholder="Enter duration" id="duration" class="form-control" value="{{old('duration')}}">
@@ -71,8 +72,17 @@
                                             <option value="Month" {{(old('duration_type') =='Month') ? 'selected' : ''}}>{{__('Month')}}</option>
                                         </select>
                                     </div>
-                                    @include('alerts.feedback', ['field' => 'price'])
+                                    @include('alerts.feedback', ['field' => 'duration'])
+                                    @include('alerts.feedback', ['field' => 'duration_type'])
                                 </div>
+                                <div class="form-group col-md-6" id="is_expiry_date" style="display: none;">
+                                    <label for="expiry_date">{{ __('Expiry Date') }}</label>
+                                    <input type="date" name="expiry_date" id="expiry_date" class="form-control" value="{{old('expiry_date')}}">
+                                    @include('alerts.feedback', ['field' => 'expiry_date'])
+                                </div>
+
+
+
                                 <div class="form-group">
                                     <label for="file">{{ __('Upload') }}</label>
                                     <input type="file" name="file" id="file" class="form-control">
@@ -117,6 +127,25 @@
                     console.error('Error fetching data:', error);
                 }
             });
+        });
+    });
+
+    $(document).ready(function(){
+        if($('#payment_type').val() === 'Due-payment'){
+            $('#is_duration').hide();
+            $('#is_expiry_date').show();
+        }else{
+            $('#is_duration').show();
+            $('#is_expiry_date').hide();
+        }
+        $('#payment_type').on('change',function(){
+            if($(this).val() === 'Due-payment'){
+                $('#is_duration').hide();
+                $('#is_expiry_date').show();
+            }else{
+                $('#is_duration').show();
+                $('#is_expiry_date').hide();
+            }
         });
     });
 </script>

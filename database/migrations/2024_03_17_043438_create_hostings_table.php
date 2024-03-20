@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('username')->nullable();
             $table->string('email');
             $table->string('password');
-            $table->date('purchase_date');
+            $table->date('purchase_date')->nullable();
             $table->date('expire_date')->nullable();
             $table->date('renew_date')->nullable();
             $table->longText('note')->nullable();
