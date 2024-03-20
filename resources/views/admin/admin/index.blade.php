@@ -17,7 +17,7 @@
 
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped">
+                    <table class="table table-striped datatable">
                         <thead>
                             <tr>
                                 <th>{{ __('SL') }}</th>
@@ -37,8 +37,8 @@
                                     <td>{{ $admin->email }}</td>
                                     <td><span class="{{ $admin->getStatusBadgeClass() }}">{{ $admin->getStatus() }}</span>
                                     </td>
-                                    <td>{{ $admin->created_user_name }}</td>
-                                    <td>{{$admin->created_date}}</td>
+                                    <td>{{ $admin->created_user_name() }}</td>
+                                    <td>{{$admin->created_date()}}</td>
                                     <td class="text-center align-middle">
                                         @include('admin.partials.action_buttons', [
                                             'menuItems' => [
@@ -101,6 +101,7 @@
         </div>
     </div>
 @endsection
+@include('admin.partials.datatable', ['columns_to_show' => [0, 1, 2, 3, 4, 5]])
 @push('js')
     <script>
         $(document).ready(function() {

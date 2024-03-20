@@ -17,7 +17,7 @@
 
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped">
+                    <table class="table table-striped datatable">
                         <thead>
                             <tr>
                                 <th>{{ __('SL') }}</th>
@@ -95,6 +95,7 @@
         </div>
     </div>
 @endsection
+@include('admin.partials.datatable', ['columns_to_show' => [0, 1, 2, 3, 4, 5, 6]])
 @push('js')
     <script>
         $(document).ready(function() {
