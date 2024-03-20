@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\CompanyReportController;
 use App\Http\Controllers\Admin\DomainController;
 use App\Http\Controllers\Admin\HostingController;
 use App\Http\Controllers\Admin\PaymentController;
@@ -105,5 +106,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
         Route::get('delete/{id}', 'delete')->name('payment_delete');
 
         Route::get('get-hostings-or-domains/{payment_for}', 'get_hostings_or_domains')->name('get_hostings_or_domains.payment_list');
+    });
+
+    // Company Report Routes 
+    Route::controller(CompanyReportController::class, 'company-report')->prefix('company-report')->name('company_report.')->group(function () {
+        Route::get('search', 'search')->name('company_report_search');
+        Route::post('search', 'searchResult')->name('company_report_search');
+        Route::get('report/{company_id}', 'report')->name('company_report');
     });
 });
