@@ -7,6 +7,7 @@ use App\Http\Requests\DomainRequest;
 use App\Models\Company;
 use App\Models\Domain;
 use App\Models\Hosting;
+use App\Models\Payment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -23,19 +24,11 @@ class DomainController extends Controller
         $data['domains'] = Domain::with(['company','hosting'])->latest()->get();
         return view('admin.domain.index',$data);
     }
-    public function details($id): JsonResponse
+    public function details($id): View
     {
-        $data = Domain::with(['company','hosting'])->findOrFail($id);
-        $data->admin_url = removeHttpProtocol($data->admin_url);
-        $data->username = $data->username ? $data->username : '--' ;
-        $data->purchase_date = $data->purchase_date ? timeFormate($data->purchase_date) : '--';
-        $data->expire_date = $data->expire_date ? timeFormate($data->expire_date) : '--';
-        $data->renew_date = $data->renew_date ? timeFormate($data->renew_date) : '--';
-        $data->creating_time = $data->created_date();
-        $data->updating_time = $data->updated_date();
-        $data->created_by = $data->created_user_name();
-        $data->updated_by = $data->updated_user_name();
-        return response()->json($data);
+        $data['domain'] = Domain::with(['created_user','company','hosting'])->findOrFail($id);
+        $data['payments'] = Payment::with('hd')->where('hd_id', $data['domain']->id)->where('hd_type', get_class($data['domain']))->get();
+        return view('admin.domain.details',$data);
     }
     public function create(): View
     {

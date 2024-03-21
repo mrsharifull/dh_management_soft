@@ -42,7 +42,7 @@
                                     <td>{{ $domain->name }}</td>
                                     <td>{{ $domain->company->name }}</td>
                                     <td>{{ $domain->username ?? '--' }}</td>
-                                    <td><a target="_blank" href="{{$domain->admin_url}}">{{removeHttpProtocol($domain->admin_url)}}</a></td>
+                                    <td><a target="_blank" class="btn btn-sm btn-primary" href="{{$domain->admin_url}}">{{__('Log In')}}</a></td>
                                     <td>{{ $domain->email }}</td>
                                     <td>{{ $domain->password }}</td>
                                     <td><span class="{{ $domain->getStatusBadgeClass() }}">{{ $domain->getStatus() }}</span>
@@ -54,10 +54,10 @@
                                         @include('admin.partials.action_buttons', [
                                             'menuItems' => [
                                                 [
-                                                    'routeName' => 'javascript:void(0)',
+                                                    'routeName' => 'domain.details.domain_list',
+                                                    'params' => [$domain->id],
                                                     'iconClass' => 'fa-regular fa-eye',
                                                     'className' => 'btn btn-primary view',
-                                                    'data-id' => $domain->id,
                                                     'title' => 'Details',
                                                 ],
                                                 [
@@ -102,8 +102,8 @@
         </div>
     </div>
 
-    {{-- Admin Details Modal  --}}
-    <div class="modal view_modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    {{-- Domain Details Modal  --}}
+    {{-- <div class="modal view_modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -117,10 +117,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 @include('admin.partials.datatable', ['columns_to_show' => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]])
-@push('js')
+{{-- @push('js')
     <script>
         $(document).ready(function() {
             $('.view').on('click', function() {
@@ -245,4 +245,4 @@
             });
         });
     </script>
-@endpush
+@endpush --}}

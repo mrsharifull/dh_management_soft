@@ -50,11 +50,6 @@
                                 <td>{{$hosting->password}}</td>
                             </tr>
                             <tr>
-                                <th>{{__('Email')}}</th>
-                                <th>:</th>
-                                <td>{{$hosting->email}}</td>
-                            </tr>
-                            <tr>
                                 <th>{{__('Purchase Date')}}</th>
                                 <th>:</th>
                                 <td>{{$hosting->purchase_date ?timeFormate($hosting->purchase_date) : '--'}}</td>
@@ -220,13 +215,13 @@
         </div>
         {{-- Total Domains  --}}
     </div>
-    {{-- Domain Details Modal  --}}
+    {{-- Payment Details Modal  --}}
     <div class="modal payment_modal_view fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ __('Domain Details') }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('Payment Details') }}</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

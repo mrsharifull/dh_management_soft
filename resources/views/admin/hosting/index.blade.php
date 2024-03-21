@@ -40,7 +40,7 @@
                                     <td>{{ $hosting->name }}</td>
                                     <td>{{ $hosting->company->name }}</td>
                                     <td>{{ $hosting->username ?? '--' }}</td>
-                                    <td><a target="_blank" href="{{$hosting->admin_url}}">{{removeHttpProtocol($hosting->admin_url)}}</a></td>
+                                    <td><a target="_blank" class="btn btn-sm btn-primary" href="{{$hosting->admin_url}}">{{__('Log In')}}</a></td>
                                     <td>{{ $hosting->email }}</td>
                                     <td>{{ $hosting->password }}</td>
                                     <td><span class="{{ $hosting->getStatusBadgeClass() }}">{{ $hosting->getStatus() }}</span>
@@ -93,7 +93,7 @@
     </div>
 
     {{-- Admin Details Modal  --}}
-    <div class="modal view_modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    {{-- <div class="modal view_modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -107,10 +107,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 @include('admin.partials.datatable', ['columns_to_show' => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]])
-@push('js')
+{{-- @push('js')
     <script>
         $(document).ready(function() {
             $('.view').on('click', function() {
@@ -224,4 +224,4 @@
             });
         });
     </script>
-@endpush
+@endpush --}}

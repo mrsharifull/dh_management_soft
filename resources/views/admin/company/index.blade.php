@@ -34,7 +34,7 @@
                                 <tr>
                                     <td> {{ $loop->iteration }} </td>
                                     <td>{{ $company->name }}</td>
-                                    <td><a target="_blank" href="{{$company->website_url}}">{{ removeHttpProtocol($company->website_url) }}</a></td>
+                                    <td><a target="_blank" class="btn btn-sm btn-primary" href="{{$company->website_url}}">{{__('Website')}}</a></td>
                                     <td><span class="{{ $company->getStatusBadgeClass() }}">{{ $company->getStatus() }}</span>
                                     </td>
                                     <td>{{ $company->created_user_name() }}</td>

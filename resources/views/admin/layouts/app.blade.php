@@ -21,12 +21,16 @@
 
 
     <div class="wrapper">
-        @include('admin.includes.nav')
-        @include('admin.includes.sidebar')
-        <div class="content-wrapper">
-            @yield('content')
-        </div>
-        @include('admin.includes.footer')
+        @auth
+            @include('admin.includes.nav')
+            @include('admin.includes.sidebar')
+            <div class="content-wrapper">
+        @endauth
+                @yield('content')
+        @auth
+            </div>
+            @include('admin.includes.footer')
+        @endauth
     </div>
 
 
