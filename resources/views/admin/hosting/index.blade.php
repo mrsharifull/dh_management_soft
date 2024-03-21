@@ -51,10 +51,10 @@
                                         @include('admin.partials.action_buttons', [
                                             'menuItems' => [
                                                 [
-                                                    'routeName' => 'javascript:void(0)',
+                                                    'routeName' => 'hosting.details.hosting_list',
+                                                    'params' => [$hosting->id],
                                                     'iconClass' => 'fa-regular fa-eye',
                                                     'className' => 'btn btn-primary view',
-                                                    'data-id' => $hosting->id,
                                                     'title' => 'Details',
                                                 ],
                                                 [

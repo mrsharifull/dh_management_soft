@@ -16,4 +16,8 @@ class Hosting extends BaseModel
     {
         return $this->hasMany(Domain::class, 'hosting_id');
     }
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'hd_id');
+    }
 }

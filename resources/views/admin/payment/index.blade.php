@@ -24,8 +24,8 @@
                                 <th>{{ __('Payment For') }}</th>
                                 <th>{{ __('Domain/Hosting') }}</th>
                                 <th>{{ __('Payment Type') }}</th>
+                                <th>{{ __('Payment Date') }}</th>
                                 <th>{{ __('Price') }}</th>
-                                <th>{{ __('Duration') }}</th>
                                 <th>{{ __('Created By') }}</th>
                                 <th class="text-center">{{ __('Action') }}</th>
                             </tr>
@@ -37,8 +37,8 @@
                                     <td> {{ $payment->payment_for }} </td>
                                     <td> {{ $payment->domain_or_hosting_name()." ($payment->payment_for)" }} </td>
                                     <td> {{ $payment->payment_type }} </td>
+                                    <td> {{ timeFormate($payment->payment_date) }} </td>
                                     <td> {{ number_format($payment->price,2) }} </td>
-                                    <td> {{ $payment->duration .' '.$payment->duration_type }} </td>
                                     <td>{{ $payment->created_user_name()}}</td>
                                     <td class="text-center align-middle">
                                         @include('admin.partials.action_buttons', [
@@ -134,11 +134,6 @@
                                         <th class="text-nowrap">Price</th>
                                         <th>:</th>
                                         <td>${data.price} Tk</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-nowrap">Duration</th>
-                                        <th>:</th>
-                                        <td>${data.duration} ${data.duration_type}</td>
                                     </tr>
                                     <tr>
                                         <th class="text-nowrap">Created At</th>
