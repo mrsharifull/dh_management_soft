@@ -21,15 +21,11 @@ class CompanyController extends Controller
         $data['companies'] = Company::with(['created_user','domains','hostings'])->latest()->get();
         return view('admin.company.index',$data);
     }
-    public function details($id): JsonResponse
+    public function details($id): View
     {
-        $data = Company::findOrFail($id);
-        $data->website_url = removeHttpProtocol($data->website_url);
-        $data->creating_time = $data->created_date();
-        $data->updating_time = $data->updated_date();
-        $data->created_by = $data->created_user_name();
-        $data->updated_by = $data->updated_user_name();
-        return response()->json($data);
+        $data['company'] = Company::with(['created_user','domains','hostings'])->findOrFail($id);
+        $data['company']->website_url = removeHttpProtocol($data['company']->website_url);
+        return view('admin.company.details',$data);
     }
     public function create(): View
     {

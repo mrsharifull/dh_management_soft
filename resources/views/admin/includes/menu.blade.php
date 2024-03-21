@@ -39,37 +39,3 @@
             ],
         ],
     ])
-
-<li class="nav-item 
-@if ($pageSlug == 'domain') menu-is-opening menu-open @endif">
-
-    <a href="javescript:void(0)" class="nav-link @if ($pageSlug == 'domain') active @endif">
-        <i class="fa-solid fa-people-roof"></i>
-        <p>
-            {{ __('Report') }}
-            <i class="right fas fa-angle-left"></i>
-        </p>
-    </a>
-    <ul class="nav nav-treeview" style="@if ($pageSlug == 'domain') display:block @endif">
-        @include('admin.partials.menu_buttons', [
-        'menuItems' => [
-            [
-                'pageSlug' => 'company_report',
-                'routeName' => 'company_report.company_report_search',
-                'label' => 'Company Report',
-            ],
-            [
-                'pageSlug' => 'domain',
-                'routeName' => 'domain.domain_list',
-                'label' => 'Hosting Report',
-            ],
-            [
-                'pageSlug' => 'domain',
-                'routeName' => 'domain.domain_list',
-                'label' => 'Domain Report',
-            ],      
-        ],
-    ])
-
-    </ul>
-</li>

@@ -43,10 +43,10 @@
                                         @include('admin.partials.action_buttons', [
                                             'menuItems' => [
                                                 [
-                                                    'routeName' => 'javascript:void(0)',
+                                                    'routeName' => 'company.details.company_list',
+                                                    'params' => [$company->id],
                                                     'iconClass' => 'fa-regular fa-eye',
                                                     'className' => 'btn btn-primary view',
-                                                    'data-id' => $company->id,
                                                     'title' => 'Details',
                                                 ],
                                                 [
@@ -85,7 +85,7 @@
     </div>
 
     {{-- Admin Details Modal  --}}
-    <div class="modal view_modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    {{-- <div class="modal view_modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -99,10 +99,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 @include('admin.partials.datatable', ['columns_to_show' => [0, 1, 2, 3, 4, 5]])
-@push('js')
+{{-- @push('js')
     <script>
         $(document).ready(function() {
             $('.view').on('click', function() {
@@ -171,4 +171,4 @@
             });
         });
     </script>
-@endpush
+@endpush --}}

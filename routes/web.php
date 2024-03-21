@@ -108,10 +108,4 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
         Route::get('get-hostings-or-domains/{payment_for}', 'get_hostings_or_domains')->name('get_hostings_or_domains.payment_list');
     });
 
-    // Company Report Routes 
-    Route::controller(CompanyReportController::class, 'company-report')->prefix('company-report')->name('company_report.')->group(function () {
-        Route::get('search', 'search')->name('company_report_search');
-        Route::post('search', 'searchResult')->name('company_report_search');
-        Route::get('report/{company_id}', 'report')->name('company_report');
-    });
 });
