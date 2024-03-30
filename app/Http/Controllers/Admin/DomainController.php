@@ -30,6 +30,18 @@ class DomainController extends Controller
         $data['payments'] = Payment::with('hd')->where('hd_id', $data['domain']->id)->where('hd_type', get_class($data['domain']))->get();
         return view('admin.domain.details',$data);
     }
+    public function view($id): JsonResponse
+    {
+        $data = Domain::with(['created_user','company','hosting'])->findOrFail($id);
+        $data->creating_time = $data->created_date(); 
+        $data->purchase_date = timeFormate($data->purchase_date); 
+        $data->renew_date = timeFormate($data->renew_date); 
+        $data->expiry_date = timeFormate($data->expiry_date); 
+        $data->updating_time = $data->updated_date();
+        $data->created_by = $data->created_user_name();
+        $data->updated_by = $data->updated_user_name();
+        return response()->json($data);
+    }
     public function create(): View
     {
         $data['companies'] = Company::activated()->latest()->get();

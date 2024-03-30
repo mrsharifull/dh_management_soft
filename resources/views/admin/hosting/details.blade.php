@@ -327,7 +327,7 @@
         $(document).ready(function() {
             $('.view2').on('click', function() {
                 let id = $(this).data('id');
-                let url = ("{{ route('domain.details.domain_list', ['id']) }}");
+                let url = ("{{ route('domain.view.domain_list', ['id']) }}");
                 let _url = url.replace('id', id);
                 $.ajax({
                     url: _url,
